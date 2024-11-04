@@ -1,6 +1,7 @@
 require("dotenv").config();
 const router = require('express').Router();
 const db = require('../config/config_db');
+const axios = require("axios");
 
 
 //Test Route
@@ -63,17 +64,20 @@ router.post("/update/profile", async (req, res) => {
 
 
 router.post("/chats/history",(req,res)=>{
-
     const username = req.body.username;
-
     if(!username){
         return res.status(400).json({message:"No username specified !"});
     }
-
     //Calling Django Rest
-
-    
-
+    axios.post("http://localhost:8080/chats",{username}).then((response)=>{
+        if(response.status === 200){
+            return res.status(200).json({message:"success",chats:response.data})
+        }
+    })
+    .catch((error)=>{
+        console.log(error);
+        return res.status(500).json({error});
+    })
 });
 
 
