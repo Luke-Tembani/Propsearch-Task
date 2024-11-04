@@ -47,6 +47,7 @@ authRoute.post('/register', async (req, res) => {
 authRoute.post('/login', async (req, res) => {
     try {
     const { username, password } = req.body;
+    console.log(username+password)
     const sql = "SELECT * FROM users WHERE username = ?";
     db.query(sql,[username],async(err,results)=>{
         if(err){

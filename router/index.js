@@ -13,6 +13,8 @@ router.post("/update/profile", async (req, res) => {
     const userId = req.userId; 
     const { username, email, profile} = req.body;
 
+    console.log(req.body);
+
     let updates = [];
     let params = [];
 
@@ -58,6 +60,24 @@ router.post("/update/profile", async (req, res) => {
         return res.status(500).json({ error: "Server error" });
     }
 });
+
+
+router.post("/chats/history",(req,res)=>{
+
+    const username = req.body.username;
+
+    if(!username){
+        return res.status(400).json({message:"No username specified !"});
+    }
+
+    //Calling Django Rest
+
+    
+
+});
+
+
+
 
 
 
